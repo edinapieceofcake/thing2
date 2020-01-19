@@ -68,14 +68,14 @@ public class Robot {
         } catch (IllegalArgumentException e) {
 
         }
-
+*/
         try {
             intake = new Intake(opMode.hardwareMap);
             subsystems.add(intake);
         } catch (IllegalArgumentException e) {
 
         }
-*/
+
         try {
             liftandarm = new LiftandArm(opMode.hardwareMap);
             subsystems.add(liftandarm);
