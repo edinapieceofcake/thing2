@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
-@Disabled
+//@Disabled
 public class LeftFlapperTest extends OpMode {
     Stickygamepad _gamepad1;
     Servo _leftArm;

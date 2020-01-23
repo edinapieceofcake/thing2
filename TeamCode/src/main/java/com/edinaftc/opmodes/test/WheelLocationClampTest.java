@@ -8,27 +8,27 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
-@Disabled
+//@Disabled
 public class WheelLocationClampTest extends OpMode {
     Stickygamepad _gamepad1;
-    DcMotor _frontLeft;
-    DcMotor _frontRight;
-    DcMotor _backLeft;
-    DcMotor _backRight;
+//    DcMotor _frontLeft;
+//    DcMotor _frontRight;
+//    DcMotor _backLeft;
+//    DcMotor _backRight;
     Servo _backLeftServo;
     Servo _backRightServo;
 
     @Override
     public void init() {
         _gamepad1 = new Stickygamepad(gamepad1);
-        _frontLeft = hardwareMap.dcMotor.get("fl");
-        _frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        _frontRight = hardwareMap.dcMotor.get("fr");
-        _frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        _backLeft = hardwareMap.dcMotor.get("bl");
-        _backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        _backRight = hardwareMap.dcMotor.get("br");
-        _backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+//        _frontLeft = hardwareMap.dcMotor.get("fl");
+//        _frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+//        _frontRight = hardwareMap.dcMotor.get("fr");
+//        _frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+//        _backLeft = hardwareMap.dcMotor.get("bl");
+//        _backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+//        _backRight = hardwareMap.dcMotor.get("br");
+//        _backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
 
 
         _backLeftServo = hardwareMap.servo.get("blhook");
@@ -39,37 +39,37 @@ public class WheelLocationClampTest extends OpMode {
     public void loop() {
         _gamepad1.update();
 
-        if (gamepad1.dpad_left) {
-            _frontLeft.setPower(.5);
-        }
-
-        if (!gamepad1.dpad_left) {
-            _frontLeft.setPower(0);
-        }
-
-        if (gamepad1.dpad_up) {
-            _frontRight.setPower(.5);
-        }
-
-        if (!gamepad1.dpad_up) {
-            _frontRight.setPower(0);
-        }
-
-        if (gamepad1.dpad_right) {
-            _backRight.setPower(.5);
-        }
-
-        if (!gamepad1.dpad_right) {
-            _backRight.setPower(0);
-        }
-
-        if (gamepad1.dpad_down) {
-            _backLeft.setPower(.5);
-        }
-
-        if (!gamepad1.dpad_down) {
-            _backLeft.setPower(0);
-        }
+//        if (gamepad1.dpad_left) {
+//            _frontLeft.setPower(.5);
+//        }
+//
+//        if (!gamepad1.dpad_left) {
+//            _frontLeft.setPower(0);
+//        }
+//
+//        if (gamepad1.dpad_up) {
+//            _frontRight.setPower(.5);
+//        }
+//
+//        if (!gamepad1.dpad_up) {
+//            _frontRight.setPower(0);
+//        }
+//
+//        if (gamepad1.dpad_right) {
+//            _backRight.setPower(.5);
+//        }
+//
+//        if (!gamepad1.dpad_right) {
+//            _backRight.setPower(0);
+//        }
+//
+//        if (gamepad1.dpad_down) {
+//            _backLeft.setPower(.5);
+//        }
+//
+//        if (!gamepad1.dpad_down) {
+//            _backLeft.setPower(0);
+//        }
 
         if (_gamepad1.x) {
             _backLeftServo.setPosition(_backLeftServo.getPosition() + .1);
@@ -87,10 +87,10 @@ public class WheelLocationClampTest extends OpMode {
             _backRightServo.setPosition(_backRightServo.getPosition() - .1);
         }
 
-        telemetry.addData("fl", "%d", _frontLeft.getCurrentPosition());
-        telemetry.addData("fr", "%d", _frontRight.getCurrentPosition());
-        telemetry.addData("bl", "%d", _backLeft.getCurrentPosition());
-        telemetry.addData("br", "%d", _backRight.getCurrentPosition());
+//        telemetry.addData("fl", "%d", _frontLeft.getCurrentPosition());
+//        telemetry.addData("fr", "%d", _frontRight.getCurrentPosition());
+//        telemetry.addData("bl", "%d", _backLeft.getCurrentPosition());
+//        telemetry.addData("br", "%d", _backRight.getCurrentPosition());
         telemetry.addData("bls", "%f", _backLeftServo.getPosition());
         telemetry.addData("brs", "%f", _backRightServo.getPosition());
 
