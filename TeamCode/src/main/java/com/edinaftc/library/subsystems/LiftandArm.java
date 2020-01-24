@@ -1,5 +1,6 @@
 package com.edinaftc.library.subsystems;
 
+import com.edinaftc.library.PIDController;
 import com.edinaftc.opmodes.teleop.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -20,6 +21,7 @@ public class LiftandArm extends Subsystem{
     private boolean toggleArmPower = false;
     private double armPowerMulti = 1;
     private boolean autoRunToPositionSet = false;
+    private PIDController pidController = null;
 // 16324
 
     public LiftandArm(HardwareMap map) {
@@ -33,15 +35,30 @@ public class LiftandArm extends Subsystem{
         rightLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightLift.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        //arm = map.crservo.get("crarm");
+        arm = map.crservo.get("crarm");
+
+        pidController = new PIDController(.0018, 0, .0001, 1, -1);
+        try {
+            pidController.start();
+        } catch (Exception ex) {}
     }
 
     @Override
     public void update() {
-        leftLift.setPower(this.liftPower);
-        rightLift.setPower(this.liftPower);
 
-//        arm.setPower(armPower);
+        if (autoLiftLocation) {
+            int currentPosition = leftLift.getCurrentPosition();
+            if (Math.abs(currentPosition - liftLocation) > 10) {
+                double liftPower = pidController.update(currentPosition);
+                leftLift.setPower(liftPower);
+                rightLift.setPower(liftPower);
+            }
+        } else {
+            leftLift.setPower(this.liftPower);
+            rightLift.setPower(this.liftPower);
+        }
+
+        arm.setPower(armPower);
     }
 
     public void setLiftPower(double liftPower) {
@@ -53,7 +70,7 @@ public class LiftandArm extends Subsystem{
 
     public void displayTelemetry(Telemetry telemetry) {
         telemetry.addData("lift position, power", "%d %f", leftLift.getCurrentPosition(), leftLift.getPower());
-        //telemetry.addData("arm power", "%f", arm.getPower());
+        telemetry.addData("arm power", "%f", arm.getPower());
         telemetry.addData("auto on, location", "%s %d", autoLiftLocation, liftLocation);
     }
 
@@ -83,6 +100,8 @@ public class LiftandArm extends Subsystem{
         } else {
             liftLocation = (int) ((1.1 * liftIndex - .6) * 1000);
         }
+
+        pidController.setSetPoint(liftLocation);
 
         autoLiftLocation = true;
         autoRunToPositionSet = false;

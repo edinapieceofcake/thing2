@@ -60,7 +60,7 @@ public class TeleOp extends OpMode {
         if(_gamepad2.left_bumper) {
             robot.grabber.loadBlock();
         }
-
+*/
         if (_gamepad2.dpad_up) {
             robot.liftandarm.increaseHHeight();
         }
@@ -77,9 +77,8 @@ public class TeleOp extends OpMode {
             robot.grabber.dropCapstone();
         }
 
-        robot.drive.displayTelemetry(telemetry);
+        //robot.drive.displayTelemetry(telemetry);
 
- */
         robot.liftandarm.displayTelemetry(telemetry);
 
         telemetry.update();
