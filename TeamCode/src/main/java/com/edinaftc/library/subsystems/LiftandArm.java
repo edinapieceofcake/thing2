@@ -30,9 +30,9 @@ public class LiftandArm extends Subsystem{
         leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightLift.setDirection(DcMotorSimple.Direction.REVERSE);
 
         arm = map.crservo.get("crarm");
@@ -45,7 +45,6 @@ public class LiftandArm extends Subsystem{
 
     @Override
     public void update() {
-
         if (autoLiftLocation) {
             int currentPosition = leftLift.getCurrentPosition();
             if (Math.abs(currentPosition - liftLocation) > 10) {
