@@ -24,8 +24,8 @@ public class Intake extends Subsystem {
 
     @Override
     public void update() {
-        leftIntake.setPower(-motorPower);
-        rightIntake.setPower(motorPower);
+        leftIntake.setPower(motorPower);
+        rightIntake.setPower(-motorPower);
         leftIntakeServo.setPower(-servoPower);
         rightIntakeServo.setPower(servoPower);
     }

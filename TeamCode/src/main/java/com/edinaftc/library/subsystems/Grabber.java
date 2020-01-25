@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Grabber extends Subsystem {
-    private boolean frontGrabberOpen = false;
-    private boolean backGrabberOpen = true;
+    private boolean frontGrabberOpen = true;
+    private boolean backGrabberOpen = false;
     private Servo front;
     private Servo back;
     private Servo capstone;
@@ -23,7 +23,7 @@ public class Grabber extends Subsystem {
         front = map.servo.get("fg");
         back = map.servo.get("bg");
         capstone = map.servo.get("capstoneservo");
-        lift = map.dcMotor.get("lift");
+        lift = map.dcMotor.get("rightLift");
         sensorRange = map.get(DistanceSensor.class, "blockdetector");
     }
 
@@ -43,17 +43,17 @@ public class Grabber extends Subsystem {
             if (frontGrabberOpen) {
                 front.setPosition(1);
             } else {
-                front.setPosition(0);
+                front.setPosition(.5);
             }
 
             if (backGrabberOpen) {
                 back.setPosition(1);
             } else {
-                back.setPosition(0);
+                back.setPosition(.3);
             }
 
             if (dropCapstone) {
-                capstone.setPosition(.75);
+                capstone.setPosition(1);
             }
         }
     }
@@ -77,7 +77,7 @@ public class Grabber extends Subsystem {
     }
 
     public void loadBlock() {
-        frontGrabberOpen = false;
-        backGrabberOpen = true;
+        frontGrabberOpen = true;
+        backGrabberOpen = false;
     }
 }

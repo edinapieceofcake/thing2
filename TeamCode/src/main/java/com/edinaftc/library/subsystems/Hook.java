@@ -24,14 +24,14 @@ public class Hook extends Subsystem {
     }
 
     public void dropHooks() {
-        _leftPosition = .3;
-        _rightPosition = .6;
+        _leftPosition = 0;
+        _rightPosition = .8;
     }
 
 
     public void liftHooks() {
-        _leftPosition = .7;
-        _rightPosition = .17;
+        _leftPosition = .8;
+        _rightPosition = .0;
     }
 
     public void turnOnUpdate() {

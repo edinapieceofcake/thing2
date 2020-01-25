@@ -61,14 +61,14 @@ public class Robot {
         this.telemetry = telemetry;
 
         subsystems = new ArrayList<>();
-/*
+
         try {
             drive = new MecanumDrive2(opMode.hardwareMap);
             subsystems.add(drive);
         } catch (IllegalArgumentException e) {
 
         }
-*/
+
         try {
             intake = new Intake(opMode.hardwareMap);
             subsystems.add(intake);
@@ -82,12 +82,11 @@ public class Robot {
         } catch (IllegalArgumentException e) {
 
         }
-/*
+
         try {
             hook = new Hook(opMode.hardwareMap);
             subsystems.add(hook);
         } catch (IllegalArgumentException e) {
-
         }
 
         try {
@@ -103,7 +102,7 @@ public class Robot {
         } catch (IllegalArgumentException e) {
 
         }
-*/
+
         subsystemUpdateExecutor = ThreadPool.newSingleThreadExecutor("subsystem update");
     }
 

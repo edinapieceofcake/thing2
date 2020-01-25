@@ -25,8 +25,8 @@ public class LiftandArm extends Subsystem{
 // 16324
 
     public LiftandArm(HardwareMap map) {
-        leftLift = map.dcMotor.get("leftlift");
-        rightLift = map.dcMotor.get("rightlift");
+        leftLift = map.dcMotor.get("leftLift");
+        rightLift = map.dcMotor.get("rightLift");
         leftLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -61,7 +61,7 @@ public class LiftandArm extends Subsystem{
     }
 
     public void setLiftPower(double liftPower) {
-        this.liftPower = liftPower;
+        this.liftPower = -liftPower;
         if (liftPower != 0) {
             autoLiftLocation = false;
         }
