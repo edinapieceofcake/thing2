@@ -33,9 +33,9 @@ public class TeleOp extends OpMode {
                 gamepad1.right_stick_x, gamepad2.left_trigger, gamepad2.right_trigger);
 
         if (_gamepad1.left_bumper) {
-            robot.intake.toggleIntake();
-        } else if (_gamepad1.right_bumper) {
             robot.intake.toggleExpel();
+        } else if (_gamepad1.right_bumper) {
+            robot.intake.toggleIntake();
         }
 
         if (gamepad1.left_trigger > 0) {
@@ -50,7 +50,7 @@ public class TeleOp extends OpMode {
             robot.drive.togglePID();
         }
 
-        robot.liftandarm.setLiftPower(gamepad2.left_stick_y);
+        robot.liftandarm.setLiftPower(gamepad2.left_stick_y, gamepad2.left_stick_button);
         robot.liftandarm.setArmPower(gamepad2.right_stick_y);
 
         if(_gamepad2.right_bumper) {
