@@ -3,6 +3,7 @@ package com.edinaftc.library.motion.roadrunner.mecanum;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
+import com.edinaftc.library.motortype.GoBILDA5202Series312;
 import com.edinaftc.library.motortype.GoBILDA5202Series435;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
@@ -18,7 +19,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
  * and op modes themselves.
  */
 @Config
-public class DriveConstants_435_35 {
+public class DriveConstants_312_50 {
 
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
@@ -27,7 +28,7 @@ public class DriveConstants_435_35 {
      * @DeviceProperties and @MotorType annotations.
      */
     public static final MotorConfigurationType MOTOR_CONFIG =
-            MotorConfigurationType.getMotorType(GoBILDA5202Series435.class);
+            MotorConfigurationType.getMotorType(GoBILDA5202Series312.class);
 
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
@@ -45,8 +46,8 @@ public class DriveConstants_435_35 {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 1.9685;
-    public static double GEAR_RATIO = .5; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 15.53;
+    public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 17.12;
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using

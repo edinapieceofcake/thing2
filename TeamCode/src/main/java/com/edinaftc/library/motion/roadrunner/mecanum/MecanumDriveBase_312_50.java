@@ -25,20 +25,20 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40.BASE_CONSTRAINTS;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40.TRACK_WIDTH;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40.kA;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40.kStatic;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40.kV;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.BASE_CONSTRAINTS;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.TRACK_WIDTH;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kA;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kStatic;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kV;
 
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
  * handled in subclasses.
  */
 @Config
-public abstract class MecanumDriveBase_435_40 extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1, .0, .1);
+public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.1);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
 
 
     public enum Mode {
@@ -65,7 +65,7 @@ public abstract class MecanumDriveBase_435_40 extends MecanumDrive {
     private double turnTimeout;
     private boolean useTimeout = false;
 
-    public MecanumDriveBase_435_40() {
+    public MecanumDriveBase_312_50() {
         super(kV, kA, kStatic, TRACK_WIDTH);
 
         dashboard = FtcDashboard.getInstance();

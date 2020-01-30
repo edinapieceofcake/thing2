@@ -2,12 +2,13 @@ package com.edinaftc.opmodes.test;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.edinaftc.library.Stickygamepad;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
-//@Disabled
+@Disabled
 @Config
 public class GrabberTest extends OpMode {
     Stickygamepad _gamepad1;

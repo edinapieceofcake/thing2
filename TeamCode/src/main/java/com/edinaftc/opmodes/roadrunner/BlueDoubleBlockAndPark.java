@@ -5,9 +5,9 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.edinaftc.library.Stickygamepad;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_40;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_435_40;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_40;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
 import com.edinaftc.library.vision.VuforiaCamera;
 import com.edinaftc.skystone.vision.SkyStoneDetector;
 import com.edinaftc.skystone.vision.SkystoneLocation;
@@ -18,9 +18,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous(name="BlueQuadBlockAndPark", group="Autonomous")
+import kotlin.Unit;
+
+@Autonomous(name="BlueDoubleBlockAndPark", group="Autonomous")
 @Config
-public class BlueQuadBlockAndPark extends LinearOpMode {
+public class BlueDoubleBlockAndPark extends LinearOpMode {
     private VuforiaCamera camera;
     private SkyStoneDetector skyStoneDetector;
     private Servo arm;
@@ -29,22 +31,29 @@ public class BlueQuadBlockAndPark extends LinearOpMode {
     private Servo right;
     private SkystoneLocation location = SkystoneLocation.left;
     private Stickygamepad _gamepad1;
-    private MecanumDriveBase_435_40 drive;
+    private MecanumDriveBase_312_50 drive;
     private DistanceSensor distance;
+
+    public static double LEFTFIRSTX = -20;
+    public static double RIGHTFIRSTX = -38;
+    public static double MIDDLEFIRSTX = -28;
+
+    public static double LEFTSECONDX = -45;
+    public static double LEFTSECONDY = 33;
+    public static double RIGHTSECONDX = -62;
+    public static double RIGHTSECONDY = 33.5;
+    public static double MIDDLESECONDX = -53;
+    public static double MIDDLESECONDY = 33;
 
     public void runOpMode() {
         long sleepTime = 0;
         double firstBlockLocation = 0;
         double secondBlockXLocation = 0;
         double secondblockYLocation = 0;
-        double thirdBlockXLocation = 0;
-        double thirdBlockYLocation = 0;
-        double fourthBlockXLocation = 0;
-        double fourthBlockYLocation = 0;
 
         skyStoneDetector = new SkyStoneDetector();
         camera = new VuforiaCamera();
-        distance = hardwareMap.get(DistanceSensor.class, "reardetector");
+        //distance = hardwareMap.get(DistanceSensor.class, "reardetector");
 
         _gamepad1 = new Stickygamepad(gamepad1);
         arm = hardwareMap.servo.get("rightArm");
@@ -62,12 +71,12 @@ public class BlueQuadBlockAndPark extends LinearOpMode {
 
         camera.initialize();
 
-        flap.setPosition(1);
+        flap.setPosition(.35);
 
         hardwareMap.servo.get("leftArm").setPosition(1);
-        hardwareMap.servo.get("leftFlap").setPosition(1);
+        hardwareMap.servo.get("leftFlap").setPosition(0);
 
-        drive = new MecanumDriveREVOptimized_435_40(hardwareMap);
+        drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
         while (!isStarted()) {
             synchronized (this) {
                 try {
@@ -83,11 +92,11 @@ public class BlueQuadBlockAndPark extends LinearOpMode {
                         }
                     }
 
-                    telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f", DriveConstants_435_40.MOTOR_CONFIG.getTicksPerRev(), DriveConstants_435_40.MOTOR_CONFIG.getGearing(), DriveConstants_435_40.MOTOR_CONFIG.getMaxRPM());
+                    telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f", DriveConstants_312_50.MOTOR_CONFIG.getTicksPerRev(), DriveConstants_312_50.MOTOR_CONFIG.getGearing(), DriveConstants_312_50.MOTOR_CONFIG.getMaxRPM());
                     telemetry.addData("use left/right bumper to adjust sleep time", "");
                     telemetry.addData("sleep time (ms)", sleepTime);
                     telemetry.addData("location ", location);
-                    telemetry.addData("distance should be about 55", "%f", distance.getDistance(DistanceUnit.CM));
+//                    telemetry.addData("distance should be about 55", "%f", distance.getDistance(DistanceUnit.CM));
                     telemetry.update();
                     this.wait();
                 } catch (InterruptedException e) {
@@ -103,151 +112,89 @@ public class BlueQuadBlockAndPark extends LinearOpMode {
 
         switch (location) {
             case left:
-                firstBlockLocation = -22;
-                secondBlockXLocation = -44;
-                secondblockYLocation = 35;
-                thirdBlockXLocation = -28; // middle
-                thirdBlockYLocation = 34;
-                fourthBlockXLocation = -36;
-                fourthBlockYLocation = 34;
+                firstBlockLocation = LEFTFIRSTX;
+                secondBlockXLocation = LEFTSECONDX;
+                secondblockYLocation = LEFTSECONDY;
                 break;
             case right:
-                firstBlockLocation = -38;
-                secondBlockXLocation = -62;
-                secondblockYLocation = 33;
-                thirdBlockXLocation = -20;
-                thirdBlockYLocation = 34;
-                fourthBlockXLocation = -28;
-                fourthBlockYLocation = 34;
+                firstBlockLocation = RIGHTFIRSTX;
+                secondBlockXLocation = RIGHTSECONDX;
+                secondblockYLocation = RIGHTSECONDY;
                 break;
             case middle:
-                firstBlockLocation = -30;
-                secondBlockXLocation = -54;
-                secondblockYLocation = 34;
-                thirdBlockXLocation = -20;
-                thirdBlockYLocation = 34;
-                fourthBlockXLocation = -36;
-                fourthBlockYLocation = 35;
+                firstBlockLocation = MIDDLEFIRSTX;
+                secondBlockXLocation = MIDDLESECONDX;
+                secondblockYLocation = MIDDLESECONDY;
                 break;
         }
 
         drive.setPoseEstimate(new Pose2d(-40.0, 63.0, Math.toRadians(0.0)));
 
         Trajectory driveToFirstBlock = drive.trajectoryBuilder()
-                .strafeTo(new Vector2d(firstBlockLocation, 32.0)).build(); // pick up first block
+                .addMarker(.5, () -> { arm.setPosition(.3); return Unit.INSTANCE; })
+                .strafeTo(new Vector2d(firstBlockLocation, 29.0)).build(); // pick up first block
 
         drive.followTrajectorySync(driveToFirstBlock);
-        arm.setPosition(1);
+
+        arm.setPosition(.35);
         sleep(250);
-        flap.setPosition(0);
-        sleep(450);
+        flap.setPosition(.9);
+        sleep(650);
         arm.setPosition(0);
-        sleep(100);
+        sleep(200);
 
         Trajectory dropOffFirstBlock = drive.trajectoryBuilder()
                 .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(20.0, 36.0)) // drop off first block
+                .splineTo(new Pose2d(60.0, 29.0)) // drop off first block
                 .build();
 
         drive.followTrajectorySync(dropOffFirstBlock);
 
-        flap.setPosition(1);
-        arm.setPosition(1);
+        arm.setPosition(.35);
         sleep(200);
-        flap.setPosition(0);
+        flap.setPosition(.35);
+        sleep(200);
+
+        flap.setPosition(1);
         arm.setPosition(0);
 
         Trajectory driveToSecondBlock = drive.trajectoryBuilder()
                 .reverse() // drive backwards
                 .splineTo(new Pose2d(0.0, 36.0))
+                //.addMarker(new Vector2d(0.0, 36.0), () -> {flap.setPosition(.35); arm.setPosition(.13); return Unit.INSTANCE;})
                 .splineTo(new Pose2d(secondBlockXLocation, secondblockYLocation)) // pick up second block
                 .build();
 
         drive.followTrajectorySync(driveToSecondBlock);
-        flap.setPosition(1);
-        arm.setPosition(1);
-        sleep(550);
-        flap.setPosition(0);
-        sleep(550);
+
+        flap.setPosition(.35);
+        sleep(200);
+        arm.setPosition(.35);
+        sleep(250);
+        flap.setPosition(.9);
+        sleep(850);
         arm.setPosition(0);
-        sleep(100);
+        sleep(200);
 
         Trajectory dropOffSecondBlock = drive.trajectoryBuilder()
                 .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(20.0, 36)) // drop off second block
+                .splineTo(new Pose2d(45.0, 29.0)) // drop off second block
                 .build();
 
         drive.followTrajectorySync(dropOffSecondBlock);
 
-        flap.setPosition(1);
-        arm.setPosition(1);
+        arm.setPosition(.35);
         sleep(200);
-        flap.setPosition(0);
-        arm.setPosition(0);
-
-        Trajectory driveToThirdBlock = drive.trajectoryBuilder()
-                .reverse() // drive backwards
-                .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(thirdBlockXLocation, thirdBlockYLocation)) // pick up second block
-                .build();
-
-        drive.followTrajectorySync(driveToThirdBlock);
-
-        flap.setPosition(1);
-        arm.setPosition(1);
-        sleep(550);
-        flap.setPosition(0);
-        sleep(550);
-        arm.setPosition(0);
-        sleep(100);
-
-        Trajectory dropOffThirdBlock = drive.trajectoryBuilder()
-                .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(20.0, 36.0)) // drop off second block
-                .build();
-
-        drive.followTrajectorySync(dropOffThirdBlock);
-
-        flap.setPosition(1);
-        arm.setPosition(1);
+        flap.setPosition(.35);
         sleep(200);
-        flap.setPosition(0);
-        arm.setPosition(0);
-
-        Trajectory driveToFourthBlock = drive.trajectoryBuilder()
-                .reverse() // drive backwards
-                .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(fourthBlockXLocation, fourthBlockYLocation)) // pick up second block
-                .build();
-
-        drive.followTrajectorySync(driveToFourthBlock);
 
         flap.setPosition(1);
-        arm.setPosition(1);
-        sleep(550);
-        flap.setPosition(0);
-        sleep(550);
-        arm.setPosition(0);
-        sleep(100);
-
-        Trajectory dropOffFourthBlock = drive.trajectoryBuilder()
-                .splineTo(new Pose2d(0.0, 36.0))
-                .splineTo(new Pose2d(20.0, 36.0)) // drop off second block
-                .build();
-
-        drive.followTrajectorySync(dropOffFourthBlock);
-
-        flap.setPosition(1);
-        arm.setPosition(1);
-        sleep(200);
-        flap.setPosition(0);
         arm.setPosition(0);
 
         Trajectory driveToBridge = drive.trajectoryBuilder()
                 .reverse()
                 .splineTo(new Pose2d(4.0, 36.0))
                 .build();
-
 
         drive.followTrajectorySync(driveToBridge);
     }
