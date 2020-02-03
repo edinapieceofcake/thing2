@@ -21,7 +21,7 @@ public class TeleOp extends OpMode {
     public void start() {
         robot.hook.turnOnUpdate();
         robot.grabber.turnOnUpdate();
-//        robot.arm.turnOnUpdate();
+        robot.arm.turnOnUpdate();
     }
 
     public void loop() {
@@ -62,11 +62,11 @@ public class TeleOp extends OpMode {
         }
 
         if (_gamepad2.dpad_up) {
-            robot.liftandarm.increaseHHeight();
+            //robot.liftandarm.increaseHHeight();
         }
 
         if (_gamepad2.dpad_down) {
-            robot.liftandarm.decreaseHeight();
+            //robot.liftandarm.decreaseHeight();
         }
 
         if (_gamepad2.right_stick_button) {

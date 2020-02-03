@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
 import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import kotlin.Unit;
@@ -13,6 +14,7 @@ import kotlin.Unit;
  * This is a simple routine to test translational drive capabilities.
  */
 @Config
+@Disabled
 @Autonomous(group = "drive")
 public class StraightTest_312_50 extends LinearOpMode {
     public static double DISTANCE = 60;

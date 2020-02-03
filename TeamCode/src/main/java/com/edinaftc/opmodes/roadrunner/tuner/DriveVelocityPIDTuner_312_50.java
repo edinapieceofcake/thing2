@@ -41,7 +41,7 @@ import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_
  */
 @Config
 @Autonomous(group = "drive")
-//@Disabled
+@Disabled
 public class DriveVelocityPIDTuner_312_50 extends LinearOpMode {
     public static double DISTANCE = 72;
 

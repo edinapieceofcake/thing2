@@ -26,10 +26,10 @@ public class ArmAndFlapper extends Subsystem {
     @Override
     public void update() {
         if (_canUpdate) {
-            _leftarm.setPosition(.7);
-            _rightarm.setPosition(.4);
-            _leftflap.setPosition(1);
-            _rightflap.setPosition(0);
+            _leftarm.setPosition(1);
+            _leftflap.setPosition(0);
+            _rightarm.setPosition(0);
+            _rightflap.setPosition(1);
         }
     }
 

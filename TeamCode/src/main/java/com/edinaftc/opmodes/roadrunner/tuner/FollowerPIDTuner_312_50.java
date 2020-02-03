@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
 import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /*
@@ -13,7 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 @Config
 @Autonomous(group = "drive")
-//@Disabled
+@Disabled
 public class FollowerPIDTuner_312_50 extends LinearOpMode {
     public static double DISTANCE = 48;
 
