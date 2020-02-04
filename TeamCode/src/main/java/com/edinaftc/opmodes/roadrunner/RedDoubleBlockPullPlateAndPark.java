@@ -225,7 +225,7 @@ public class RedDoubleBlockPullPlateAndPark extends LinearOpMode {
 
         Trajectory driveToBridge = drive.trajectoryBuilder()
                 .strafeTo(new Vector2d(30, -33))
-                .lineTo(new Vector2d(8.0, -33)) // drive to bridge
+                .lineTo(new Vector2d(4.0, -33)) // drive to bridge
                 .build();
 
         drive.followTrajectorySync(driveToBridge);
