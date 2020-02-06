@@ -41,15 +41,15 @@ public class Grabber extends Subsystem {
             }
 */
             if (frontGrabberOpen) {
-                front.setPosition(1);
+                front.setPosition(.8);
             } else {
                 front.setPosition(.4);
             }
 
             if (backGrabberOpen) {
-                back.setPosition(1);
+                back.setPosition(.65);
             } else {
-                back.setPosition(.3);
+                back.setPosition(.33);
             }
 
             if (dropCapstone) {

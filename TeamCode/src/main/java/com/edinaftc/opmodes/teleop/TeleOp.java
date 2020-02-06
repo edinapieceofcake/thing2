@@ -73,6 +73,10 @@ public class TeleOp extends OpMode {
             robot.liftandarm.toggleArmPower();
         }
 
+        if (_gamepad2.a) {
+            robot.liftandarm.armForBlock();
+        }
+
         if (_gamepad2.x && _gamepad2.b) {
             robot.grabber.dropCapstone();
         }
