@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class LiftandArm extends Subsystem{
-    private double liftIndex = 1;
+    private int liftIndex = 1;
     private boolean autoLiftLocation = false;
     private int liftLocation;
     private DcMotor leftLift;
@@ -17,13 +17,9 @@ public class LiftandArm extends Subsystem{
     private DcMotor armEncoder;
     private CRServo arm;
     private double liftPower, armPower;
-    private boolean toggleArmPower = false;
-    private double armPowerMulti = 1;
     private boolean autoArmLocation = false;
-    private PIDController pidController = null;
 
     public static int TARGETPOSITION = 15000;
-// 16324
 
     public LiftandArm(HardwareMap map) {
         leftLift = map.dcMotor.get("leftLift");
@@ -40,21 +36,19 @@ public class LiftandArm extends Subsystem{
 
         armEncoder = map.dcMotor.get("il");
         armEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        pidController = new PIDController(.0018, 0, .0001, 1, -1);
-        try {
-            pidController.start();
-        } catch (Exception ex) {}
     }
 
     @Override
     public void update() {
         if (autoLiftLocation) {
-            int currentPosition = leftLift.getCurrentPosition();
-            if (Math.abs(currentPosition - liftLocation) > 10) {
-                double liftPower = pidController.update(currentPosition);
-                leftLift.setPower(liftPower);
-                rightLift.setPower(liftPower);
+            int currentPosition = rightLift.getCurrentPosition();
+            int difference = (liftLocation - currentPosition);
+            double motorPower = difference * .75/liftLocation;
+            if (motorPower < .25) {
+                autoLiftLocation = false;
+            } else {
+                leftLift.setPower(motorPower);
+                rightLift.setPower(motorPower);
             }
         } else {
             leftLift.setPower(this.liftPower);
@@ -90,13 +84,18 @@ public class LiftandArm extends Subsystem{
     }
 
     public void displayTelemetry(Telemetry telemetry) {
-        telemetry.addData("lift position, power", "%d %f", leftLift.getCurrentPosition(), leftLift.getPower());
+        telemetry.addData("lift position, power", "%d %f", rightLift.getCurrentPosition(), leftLift.getPower());
         telemetry.addData("arm position, power", "%d %f", armEncoder.getCurrentPosition(), arm.getPower());
         telemetry.addData("auto on, location", "%s %d", autoLiftLocation, liftLocation);
     }
 
-    public void setArmPower(double armPower) {
-        this.armPower = -.8 * armPower * armPowerMulti;
+    public void setArmPower(double armPower, boolean downPressed) {
+        if (downPressed) {
+            this.armPower = -.8 * armPower;
+        } else {
+            this.armPower = -.8 * armPower * .4;
+        }
+
         if (armPower != 0) {
             autoLiftLocation = false;
             autoArmLocation = false;
@@ -106,9 +105,14 @@ public class LiftandArm extends Subsystem{
     public void armForBlock() {
         autoArmLocation = true;
     }
+
     public void increaseHHeight() {
         liftIndex++;
         computeLocation();
+    }
+
+    public void resetHeight() {
+        liftIndex = 0;
     }
 
     public void decreaseHeight() {
@@ -122,20 +126,12 @@ public class LiftandArm extends Subsystem{
     private void computeLocation() {
         if (liftIndex == 0) {
             liftLocation = 0;
+        } else if (liftIndex ==  1){
+            liftLocation = 650;
         } else {
-            liftLocation = (int) ((1.1 * liftIndex - .6) * 1000);
+            liftLocation = 650 + (750 * (liftIndex -1));
         }
-
-        pidController.setSetPoint(liftLocation);
 
         autoLiftLocation = true;
-    }
-
-    public void toggleArmPower() {
-        if (armPowerMulti == 1) {
-            armPowerMulti = .25;
-        } else {
-            armPowerMulti = 1;
-        }
     }
 }
