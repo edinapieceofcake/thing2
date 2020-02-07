@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
-@Disabled
+//@Disabled
 @Config
 public class RightFlapperTest extends OpMode {
     Stickygamepad _gamepad1;
