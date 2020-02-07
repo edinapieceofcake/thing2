@@ -18,8 +18,8 @@ public class LiftandArm extends Subsystem{
     private CRServo arm;
     private double liftPower, armPower;
     private boolean autoArmLocation = false;
-
-    public static int TARGETPOSITION = 15000;
+    private int TARGETPOSITION = 0;
+    private int TARGETDISTANCE = 15000;
 
     public LiftandArm(HardwareMap map) {
         leftLift = map.dcMotor.get("leftLift");
@@ -35,7 +35,8 @@ public class LiftandArm extends Subsystem{
         arm = map.crservo.get("crarm");
 
         armEncoder = map.dcMotor.get("il");
-        armEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        TARGETPOSITION = TARGETDISTANCE + armEncoder.getCurrentPosition();
+        //armEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     @Override

@@ -40,11 +40,11 @@ public class BlueDoubleBlockPullPlateAndPark extends LinearOpMode {
     public static double MIDDLEFIRSTX = -28;
 
     public static double LEFTSECONDX = -44;
-    public static double LEFTSECONDY = 33;
+    public static double LEFTSECONDY = 32.5;
     public static double RIGHTSECONDX = -62;
-    public static double RIGHTSECONDY = 33;
+    public static double RIGHTSECONDY = 32.5;
     public static double MIDDLESECONDX = -53;
-    public static double MIDDLESECONDY = 33;
+    public static double MIDDLESECONDY = 32.5;
 
     public void runOpMode() {
         long sleepTime = 0;

@@ -84,7 +84,7 @@ public class RedPullPlateAndPark extends LinearOpMode {
         sleep(900);
 
         Trajectory pullPlate = drive.trajectoryBuilder()
-                .lineTo(new Vector2d(50.0, -64.0)) // drag forward and turn
+                .lineTo(new Vector2d(50.0, -63.5)) // drag forward and turn
                 .build();
 
         drive.followTrajectorySync(pullPlate);
@@ -94,7 +94,7 @@ public class RedPullPlateAndPark extends LinearOpMode {
         sleep(700);
 
         Trajectory driveToBridge = drive.trajectoryBuilder()
-                .strafeTo(new Vector2d(-8.0, -64)) // drive to bridge
+                .strafeTo(new Vector2d(-8.0, -63.4)) // drive to bridge
                 .build();
         drive.followTrajectorySync(driveToBridge);
     }
