@@ -171,7 +171,7 @@ public class BlueDoubleBlockPullPlateAndPark extends LinearOpMode {
 
         drive.followTrajectorySync(driveToSecondBlock);
 
-        arm.setPosition(1);
+        arm.setPosition(.35);
         sleep(250);
         flap.setPosition(.9);
         sleep(850);
