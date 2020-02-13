@@ -18,6 +18,8 @@ public class Grabber extends Subsystem {
     private boolean _canUpdate = false;
    // private boolean grabberClosed = false;
     private boolean dropCapstone = false;
+    private boolean timerStarted = false;
+    private long startTime = 0;
 
     public Grabber(HardwareMap map) {
         front = map.servo.get("fg");
@@ -79,5 +81,30 @@ public class Grabber extends Subsystem {
     public void loadBlock() {
         frontGrabberOpen = true;
         backGrabberOpen = false;
+    }
+
+    public void handleGrabberButton(boolean leftBumperToggled, boolean rightBumperToggled, boolean leftBumperPressed, boolean rightBumperPressed) {
+        if (rightBumperToggled) {
+            toggleBothGrabbers();
+        }
+
+        if (leftBumperToggled) {
+            loadBlock();
+        }
+
+        if (leftBumperPressed && rightBumperPressed) {
+            if (!timerStarted) {
+                timerStarted = true;
+                startTime = System.currentTimeMillis();
+            }
+
+            if ((System.currentTimeMillis() - startTime) > 1000) {
+                dropCapstone = true;
+                timerStarted = false;
+            }
+        } else {
+            timerStarted = false;
+        }
+
     }
 }

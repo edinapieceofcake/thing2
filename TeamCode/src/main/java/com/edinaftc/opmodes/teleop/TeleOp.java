@@ -30,7 +30,8 @@ public class TeleOp extends OpMode {
         _gamepad2.update();
 
         robot.drive.setVelocity(gamepad1.left_stick_x, gamepad1.left_stick_y,
-                gamepad1.right_stick_x, gamepad2.left_trigger, gamepad2.right_trigger);
+                gamepad1.right_stick_x, gamepad2.left_trigger, gamepad2.right_trigger,
+                gamepad1.left_stick_button, gamepad1.right_stick_button);
 
         if (_gamepad1.left_bumper) {
             robot.intake.toggleExpel();
@@ -46,20 +47,10 @@ public class TeleOp extends OpMode {
             robot.hook.dropHooks();
         }
 
-        if (_gamepad1.right_stick_button) {
-            robot.drive.togglePID();
-        }
-
         robot.liftandarm.setLiftPower(gamepad2.left_stick_y, gamepad2.left_stick_button);
         robot.liftandarm.setArmPower(gamepad2.right_stick_y, gamepad2.right_stick_button);
 
-        if(_gamepad2.right_bumper) {
-            robot.grabber.toggleBothGrabbers();
-        }
-
-        if(_gamepad2.left_bumper) {
-            robot.grabber.loadBlock();
-        }
+        robot.grabber.handleGrabberButton(_gamepad2.left_bumper, _gamepad2.right_bumper, gamepad2.left_bumper, gamepad2.right_bumper);
 
         if (_gamepad2.dpad_up) {
             robot.liftandarm.increaseHHeight();

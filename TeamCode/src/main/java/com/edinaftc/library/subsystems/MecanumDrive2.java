@@ -22,6 +22,8 @@ public class MecanumDrive2 extends Subsystem{
     private double rightStickY;
     private double leftTrigger;
     private double rightTrigger;
+    private double leftStickSpeed = 1.0;
+    private double rightStickSpeed = 1.0;
     private PIDFCoefficients normalVelocityPID = null;
     private PIDFCoefficients slowVelocityPID = new PIDFCoefficients(10, 3, 1, 0, MotorControlAlgorithm.LegacyPID);
 
@@ -44,12 +46,25 @@ public class MecanumDrive2 extends Subsystem{
         normalVelocityPID = motors[0].getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public void setVelocity(double leftStickX, double leftStickY, double rightStickY, double leftTrigger, double rightTrigger) {
+    public void setVelocity(double leftStickX, double leftStickY, double rightStickY, double leftTrigger, double rightTrigger,
+                            boolean leftStickPressed, boolean rightStickPressed) {
         this.leftStickX = leftStickX;
         this.leftStickY = leftStickY;
         this.rightStickY = rightStickY;
         this.leftTrigger = leftTrigger;
         this.rightTrigger = rightTrigger;
+
+        if (leftStickPressed) {
+            leftStickSpeed = 1.0;
+        } else {
+            leftStickSpeed = .5;
+        }
+
+        if (rightStickPressed) {
+            rightStickSpeed = 1.0;
+        } else {
+            rightStickSpeed = 0.5;
+        }
     }
 
     public void update() {
@@ -60,7 +75,7 @@ public class MecanumDrive2 extends Subsystem{
         if (leftStickX != 0 || leftStickY != 0 || rightStickY != 0) {
             x = Math.pow(-leftStickX, 3.0);
             y = Math.pow(leftStickY, 3.0);
-            rotation = Math.pow(-rightStickY, 3.0);
+            rotation = Math.pow(-rightStickY, 3.0) * rightStickSpeed;
         } else if (rightTrigger != 0) {
             x = Math.pow(rightTrigger, 3.0) * .3;
             y = 0;
@@ -76,7 +91,7 @@ public class MecanumDrive2 extends Subsystem{
         }
 
         final double direction = Math.atan2(x, y);
-        final double speed = Math.min(1.0, Math.sqrt(x * x + y * y));
+        final double speed = Math.min(1.0, Math.sqrt(x * x + y * y)) * leftStickSpeed;
 
         powers[0] = (speed * Math.sin(direction + Math.PI / 4.0) + rotation) * currentPower;
         powers[3] = (speed * Math.cos(direction + Math.PI / 4.0) - rotation) * currentPower;

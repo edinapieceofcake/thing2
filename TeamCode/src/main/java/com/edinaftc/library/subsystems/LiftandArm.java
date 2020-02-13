@@ -70,17 +70,15 @@ public class LiftandArm extends Subsystem{
     }
 
     public void setLiftPower(double liftPower, boolean downPressed) {
-        if(liftPower > 0) {
-            if (downPressed) {
-                this.liftPower = -liftPower;
-            } else {
-                this.liftPower = -liftPower*.5;
-            }
-        } else {
+        if (downPressed) {
             this.liftPower = -liftPower;
+        } else {
+            this.liftPower = -liftPower*.5;
         }
+
         if (liftPower != 0) {
             autoLiftLocation = false;
+            autoArmLocation = false;
         }
     }
 
