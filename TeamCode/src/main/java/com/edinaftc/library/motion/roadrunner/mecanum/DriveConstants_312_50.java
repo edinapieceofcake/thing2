@@ -68,7 +68,7 @@ public class DriveConstants_312_50 {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            35, 30, 0.0,
+            50, 40, 0.0,
             Math.toRadians(180.0), Math.toRadians(180.0), 0.0
     );
 

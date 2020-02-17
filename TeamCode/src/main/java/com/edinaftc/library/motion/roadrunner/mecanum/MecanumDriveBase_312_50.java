@@ -37,7 +37,7 @@ import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_
  */
 @Config
 public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.1);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.105);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
 
 
