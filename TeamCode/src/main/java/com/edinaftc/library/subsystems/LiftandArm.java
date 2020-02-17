@@ -73,7 +73,7 @@ public class LiftandArm extends Subsystem{
         if (downPressed) {
             this.liftPower = -liftPower;
         } else {
-            this.liftPower = -liftPower*.5;
+            this.liftPower = -liftPower*.6;
         }
 
         if (liftPower != 0) {

@@ -98,7 +98,7 @@ public class Grabber extends Subsystem {
                 startTime = System.currentTimeMillis();
             }
 
-            if ((System.currentTimeMillis() - startTime) > 1000) {
+            if ((System.currentTimeMillis() - startTime) > 500) {
                 dropCapstone = true;
                 timerStarted = false;
             }

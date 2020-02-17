@@ -64,10 +64,6 @@ public class TeleOp extends OpMode {
             robot.liftandarm.armForBlock();
         }
 
-        if (_gamepad2.x && _gamepad2.b) {
-            robot.grabber.dropCapstone();
-        }
-
         robot.drive.displayTelemetry(telemetry);
 
         robot.liftandarm.displayTelemetry(telemetry);
