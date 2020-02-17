@@ -122,21 +122,21 @@ public class RedTripleBlockPullPlateAndPark extends LinearOpMode {
                 secondBlockXLocation = LEFTSECONDX;
                 secondblockYLocation = LEFTSECONDY;
                 thirdBlockXLocation = MIDDLEFIRSTX;
-                thirdBlockYLocation = 32;
+                thirdBlockYLocation = -32;
                 break;
             case right:
                 firstBlockLocation = RIGHTFIRSTX;
                 secondBlockXLocation = RIGHTSECONDX;
                 secondblockYLocation = RIGHTSECONDY;
                 thirdBlockXLocation = LEFTFIRSTX;
-                thirdBlockYLocation = 32;
+                thirdBlockYLocation = -32;
                 break;
             case middle:
                 firstBlockLocation = MIDDLEFIRSTX;
                 secondBlockXLocation = MIDDLESECONDX;
                 secondblockYLocation = MIDDLESECONDY;
                 thirdBlockXLocation = LEFTFIRSTX;
-                thirdBlockYLocation = 32;
+                thirdBlockYLocation = -32;
                 break;
         }
 
