@@ -55,15 +55,15 @@ public class MecanumDrive2 extends Subsystem{
         this.rightTrigger = rightTrigger;
 
         if (leftStickPressed) {
-            leftStickSpeed = 1.0;
+            leftStickSpeed = rightStickSpeed =1.0;
         } else {
-            leftStickSpeed = .5;
+            leftStickSpeed = rightStickSpeed= .5;
         }
 
         if (rightStickPressed) {
-            rightStickSpeed = 1.0;
+            rightStickSpeed = leftStickSpeed = 1.0;
         } else {
-            rightStickSpeed = 0.5;
+            rightStickSpeed = leftStickSpeed = 0.5;
         }
     }
 
