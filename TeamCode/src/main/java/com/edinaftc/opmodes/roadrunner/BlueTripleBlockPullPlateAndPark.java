@@ -230,14 +230,14 @@ public class BlueTripleBlockPullPlateAndPark extends LinearOpMode {
         Trajectory backupAndPrepForTurn = drive.trajectoryBuilder()
                 .reverse() // drive backwards
                 .lineTo(new Vector2d(42.0, 36.0), new LinearInterpolator(Math.toRadians(90), Math.toRadians(-90)))
-                .lineTo(new Vector2d(42, 26.0)) // backup
+                .lineTo(new Vector2d(42, 24.0)) // backup
                 .build();
 
         drive.followTrajectorySync(backupAndPrepForTurn);
 
         left.setPosition(0);
         right.setPosition(.8);
-        sleep(200);
+        sleep(300);
 
         Trajectory pullForward = drive.trajectoryBuilder()
                 .lineTo(new Vector2d(42.0, 45.0)) // drag forward and turn

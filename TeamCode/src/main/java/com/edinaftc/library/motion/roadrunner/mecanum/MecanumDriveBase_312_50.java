@@ -37,9 +37,12 @@ import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_
  */
 @Config
 public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.105);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
+    //public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.105);
+    //public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
 
+    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(0.05, 0, 0.1);
+    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(23, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
 
     public enum Mode {
         IDLE,
@@ -79,7 +82,8 @@ public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
         turnController.setInputBounds(0, 2 * Math.PI);
 
         constraints = new MecanumConstraints(BASE_CONSTRAINTS, TRACK_WIDTH);
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
+        follower = new HolonomicPIDVAFollower(AXIAL_PID, LATERAL_PID, HEADING_PID);
+        //follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
     }
 
     public TrajectoryBuilder trajectoryBuilder() {
