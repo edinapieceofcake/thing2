@@ -25,19 +25,20 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.BASE_CONSTRAINTS;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.TRACK_WIDTH;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kA;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kStatic;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kV;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.BASE_CONSTRAINTS;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.TRACK_WIDTH;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kA;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kStatic;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kV;
 
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
  * handled in subclasses.
  */
 @Config
-public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(1.5, 0, 0.105);
+public abstract class MecanumDriveBase_312_60 extends MecanumDrive {
+    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(0.05, 0, 0.1);
+    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(23, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
 
     public enum Mode {
@@ -64,7 +65,7 @@ public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
     private double turnTimeout;
     private boolean useTimeout = false;
 
-    public MecanumDriveBase_312_50() {
+    public MecanumDriveBase_312_60() {
         super(kV, kA, kStatic, TRACK_WIDTH);
 
         dashboard = FtcDashboard.getInstance();
@@ -78,7 +79,7 @@ public abstract class MecanumDriveBase_312_50 extends MecanumDrive {
         turnController.setInputBounds(0, 2 * Math.PI);
 
         constraints = new MecanumConstraints(BASE_CONSTRAINTS, TRACK_WIDTH);
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID);
+        follower = new HolonomicPIDVAFollower(AXIAL_PID, LATERAL_PID, HEADING_PID);
     }
 
     public TrajectoryBuilder trajectoryBuilder() {

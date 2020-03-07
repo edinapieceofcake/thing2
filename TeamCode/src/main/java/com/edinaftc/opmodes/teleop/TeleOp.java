@@ -4,15 +4,21 @@ import com.edinaftc.library.Stickygamepad;
 import com.edinaftc.skystone.Robot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.openftc.revextensions2.ExpansionHubEx;
+
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "teleop")
 public class TeleOp extends OpMode {
     private Robot robot;
     private Stickygamepad _gamepad1;
     private Stickygamepad _gamepad2;
+    private ExpansionHubEx _hub2;
+    private ExpansionHubEx _hub9;
 
     public void init() {
         _gamepad1 = new Stickygamepad(gamepad1);
         _gamepad2 = new Stickygamepad(gamepad2);
+        _hub2 = hardwareMap.get(ExpansionHubEx.class, "hub2");
+        _hub9 = hardwareMap.get(ExpansionHubEx.class, "hub9");
         robot = new Robot(this, telemetry);
         robot.start();
     }
@@ -68,6 +74,8 @@ public class TeleOp extends OpMode {
 
         robot.liftandarm.displayTelemetry(telemetry);
 
+        telemetry.addData("Total current hub2 ", _hub2.getTotalModuleCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
+        telemetry.addData("Total current hub9 ", _hub9.getTotalModuleCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         telemetry.update();
     }
 

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.configuration.annotations.MotorType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Rotation;
 
-@MotorType(ticksPerRev=383.6, gearing=13.7, maxRPM=435, orientation= Rotation.CCW)
+@MotorType(ticksPerRev=383.6, gearing=13.7, maxRPM=435, orientation= Rotation.CCW, achieveableMaxRPMFraction = 1.0)
 @DeviceProperties(xmlTag="goBILDA5202SeriesMotor435", name="GoBILDA 5202 series435", builtIn = true)
 @DistributorInfo(distributor="goBILDA_distributor", model="goBILDA-5202", url="https://www.gobilda.com/5202-series-yellow-jacket-planetary-gear-motors/")
 @ExpansionHubPIDFVelocityParams(P=18.0, I=0.5, D=5, F=12.1)

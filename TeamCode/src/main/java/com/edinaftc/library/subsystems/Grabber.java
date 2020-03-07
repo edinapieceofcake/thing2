@@ -69,6 +69,9 @@ public class Grabber extends Subsystem {
             frontGrabberOpen = true;
             backGrabberOpen = true;
         } else {
+            lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             frontGrabberOpen = false;
             backGrabberOpen = false;
         }
@@ -84,14 +87,6 @@ public class Grabber extends Subsystem {
     }
 
     public void handleGrabberButton(boolean leftBumperToggled, boolean rightBumperToggled, boolean leftBumperPressed, boolean rightBumperPressed) {
-        if (rightBumperToggled) {
-            toggleBothGrabbers();
-        }
-
-        if (leftBumperToggled) {
-            loadBlock();
-        }
-
         if (leftBumperPressed && rightBumperPressed) {
             if (!timerStarted) {
                 timerStarted = true;
@@ -103,8 +98,15 @@ public class Grabber extends Subsystem {
                 timerStarted = false;
             }
         } else {
+            if (rightBumperToggled) {
+                toggleBothGrabbers();
+            }
+
+            if (leftBumperToggled) {
+                loadBlock();
+            }
+
             timerStarted = false;
         }
-
     }
 }

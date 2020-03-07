@@ -3,8 +3,8 @@ package com.edinaftc.library.motion.roadrunner.mecanum;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
+import com.edinaftc.library.motortype.GoBILDA5202Series1150;
 import com.edinaftc.library.motortype.GoBILDA5202Series312;
-import com.edinaftc.library.motortype.GoBILDA5202Series435;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 /*
@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
  * and op modes themselves.
  */
 @Config
-public class DriveConstants_312_50 {
+public class DriveConstants_312_60 {
 
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
@@ -34,8 +34,9 @@ public class DriveConstants_312_50 {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner_435_35.
      */
-    public static final boolean RUN_USING_ENCODER = true;
     public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(35, 1, 15);
+
+    public static final boolean RUN_USING_ENCODER = false;
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -47,7 +48,7 @@ public class DriveConstants_312_50 {
      */
     public static double WHEEL_RADIUS = 1.9685;
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 17.12;
+    public static double TRACK_WIDTH = 15.79;
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -55,9 +56,11 @@ public class DriveConstants_312_50 {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 1.0 / rpmToVelocity(getMaxRpm());
-    public static double kA = 0;
-    public static double kStatic = 0;
+
+    public static double kV = 0.01554;
+    public static double kA = 0.00136;
+    public static double kStatic = 0.09265;
+
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -68,7 +71,7 @@ public class DriveConstants_312_50 {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            45, 40, 0.0,
+            60, 55, 0.0,
             Math.toRadians(270.0), Math.toRadians(270.0), 0.0
     );
 

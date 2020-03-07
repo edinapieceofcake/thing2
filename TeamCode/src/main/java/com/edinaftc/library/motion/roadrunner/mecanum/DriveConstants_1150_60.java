@@ -3,8 +3,7 @@ package com.edinaftc.library.motion.roadrunner.mecanum;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
-import com.edinaftc.library.motortype.GoBILDA5202Series312;
-import com.edinaftc.library.motortype.GoBILDA5202Series435;
+import com.edinaftc.library.motortype.GoBILDA5202Series1150;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
 /*
@@ -19,7 +18,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
  * and op modes themselves.
  */
 @Config
-public class DriveConstants_312_50 {
+public class DriveConstants_1150_60 {
 
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
@@ -28,14 +27,14 @@ public class DriveConstants_312_50 {
      * @DeviceProperties and @MotorType annotations.
      */
     public static final MotorConfigurationType MOTOR_CONFIG =
-            MotorConfigurationType.getMotorType(GoBILDA5202Series312.class);
+            MotorConfigurationType.getMotorType(GoBILDA5202Series1150.class);
 
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner_435_35.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(35, 1, 15);
+    public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(50, 1, 15);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -46,8 +45,8 @@ public class DriveConstants_312_50 {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 1.9685;
-    public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 17.12;
+    public static double GEAR_RATIO = .5; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 15.79;
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -68,7 +67,7 @@ public class DriveConstants_312_50 {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            45, 40, 0.0,
+            60, 65, 0.0,
             Math.toRadians(270.0), Math.toRadians(270.0), 0.0
     );
 

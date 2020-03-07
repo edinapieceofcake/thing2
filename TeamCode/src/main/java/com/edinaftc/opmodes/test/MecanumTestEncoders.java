@@ -87,6 +87,9 @@ public class MecanumTestEncoders extends LinearOpMode {
             telemetry.addData("fr", "%d", hardwareMap.dcMotor.get("fr").getCurrentPosition());
             telemetry.addData("bl", "%d", hardwareMap.dcMotor.get("bl").getCurrentPosition());
             telemetry.addData("br", "%d", hardwareMap.dcMotor.get("br").getCurrentPosition());
+            telemetry.addData("left", "%d", hardwareMap.dcMotor.get("leftLift").getCurrentPosition());
+            telemetry.addData("right", "%d", hardwareMap.dcMotor.get("ir").getCurrentPosition());
+//            telemetry.addData("middle", "%d", hardwareMap.dcMotor.get("leftLift").getCurrentPosition());
             telemetry.update();
         }
     }
