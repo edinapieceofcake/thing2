@@ -5,9 +5,8 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.util.Angle;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -36,7 +35,7 @@ public class TrackWidthTuner_312_50 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        MecanumDriveBase_312_50 drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        MecanumDriveREVOptimized_435_60 drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
         // TODO: if you haven't already, set the localizer to something that doesn't depend on
         // drive encoders for computing the heading
 
@@ -70,7 +69,7 @@ public class TrackWidthTuner_312_50 extends LinearOpMode {
                 drive.update();
             }
 
-            double trackWidth = DriveConstants_312_50.TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
+            double trackWidth = DriveConstants_435_60.TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
             trackWidthStats.add(trackWidth);
 
             sleep(DELAY);

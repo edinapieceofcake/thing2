@@ -13,9 +13,8 @@ import com.acmerobotics.roadrunner.profile.MotionProfile;
 import com.acmerobotics.roadrunner.profile.MotionProfileGenerator;
 import com.acmerobotics.roadrunner.profile.MotionState;
 import com.acmerobotics.roadrunner.util.NanoClock;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -24,8 +23,8 @@ import com.qualcomm.robotcore.util.RobotLog;
 
 import java.util.List;
 
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.RUN_USING_ENCODER;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.kV;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.RUN_USING_ENCODER;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.kV;
 
 
 /*
@@ -51,15 +50,15 @@ public class DriveVelocityPIDTuner_312_50 extends LinearOpMode {
     private String catName;
     private CustomVariable catVar;
 
-    private MecanumDriveBase_312_50 drive;
+    private MecanumDriveREVOptimized_435_60 drive;
 
     private static MotionProfile generateProfile(boolean movingForward) {
         MotionState start = new MotionState(movingForward ? 0 : DISTANCE, 0, 0, 0);
         MotionState goal = new MotionState(movingForward ? DISTANCE : 0, 0, 0, 0);
         return MotionProfileGenerator.generateSimpleMotionProfile(start, goal,
-                DriveConstants_312_50.BASE_CONSTRAINTS.maxVel,
-                DriveConstants_312_50.BASE_CONSTRAINTS.maxAccel,
-                DriveConstants_312_50.BASE_CONSTRAINTS.maxJerk);
+                DriveConstants_435_60.BASE_CONSTRAINTS.maxVel,
+                DriveConstants_435_60.BASE_CONSTRAINTS.maxAccel,
+                DriveConstants_435_60.BASE_CONSTRAINTS.maxJerk);
     }
 
     private void addPidVariable() {
@@ -136,14 +135,14 @@ public class DriveVelocityPIDTuner_312_50 extends LinearOpMode {
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
-        drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
 
         addPidVariable();
 
         NanoClock clock = NanoClock.system();
 
-        telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f", DriveConstants_312_50.MOTOR_CONFIG.getTicksPerRev(),
-                DriveConstants_312_50.MOTOR_CONFIG.getGearing(), DriveConstants_312_50.MOTOR_CONFIG.getMaxRPM());
+        telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f", DriveConstants_435_60.MOTOR_CONFIG.getTicksPerRev(),
+                DriveConstants_435_60.MOTOR_CONFIG.getGearing(), DriveConstants_435_60.MOTOR_CONFIG.getMaxRPM());
         telemetry.addLine("Ready!");
         telemetry.update();
         telemetry.clearAll();

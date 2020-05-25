@@ -3,6 +3,7 @@ package com.edinaftc.library.motion.roadrunner.mecanum;
 import android.support.annotation.NonNull;
 
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
+import com.edinaftc.library.motion.roadrunner.StandardTrackingWheelLocalizer;
 import com.edinaftc.library.motion.roadrunner.util.AxesSigns;
 import com.edinaftc.library.motion.roadrunner.util.BNO055IMUUtil;
 import com.edinaftc.library.motion.roadrunner.util.LynxModuleUtil;
@@ -21,22 +22,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.MOTOR_VELO_PID;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.RUN_USING_ENCODER;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50.encoderTicksToInches;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.MOTOR_VELO_PID;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.RUN_USING_ENCODER;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.encoderTicksToInches;
 
 /*
  * Optimized mecanum drive implementation for REV ExHs. The time savings may significantly improve
  * trajectory following performance with moderate additional complexity.
  */
-public class MecanumDriveREVOptimized_312_50 extends MecanumDriveBase_312_50 {
+public class MecanumDriveREVOptimized_435_60 extends MecanumDriveBase_435_60 {
     private ExpansionHubEx hub9;
     private ExpansionHubEx hub2;
     private ExpansionHubMotor leftFront, leftRear, rightRear, rightFront;
     private List<ExpansionHubMotor> motors;
     private BNO055IMU imu;
 
-    public MecanumDriveREVOptimized_312_50(HardwareMap hardwareMap) {
+    public MecanumDriveREVOptimized_435_60(HardwareMap hardwareMap) {
         super();
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
@@ -79,7 +80,7 @@ public class MecanumDriveREVOptimized_312_50 extends MecanumDriveBase_312_50 {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
-        //setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
+        setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap));
     }
 
     @Override
@@ -92,7 +93,7 @@ public class MecanumDriveREVOptimized_312_50 extends MecanumDriveBase_312_50 {
     public void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients) {
         for (ExpansionHubMotor motor : motors) {
             motor.setPIDFCoefficients(runMode, new PIDFCoefficients(
-                    coefficients.kP, coefficients.kI, coefficients.kD, DriveConstants_312_50.getMotorVelocityF()
+                    coefficients.kP, coefficients.kI, coefficients.kD, DriveConstants_435_60.getMotorVelocityF()
             ));
         }
     }

@@ -8,13 +8,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
-@Disabled
+//@Disabled
 public class WheelLocationClampTest extends OpMode {
     Stickygamepad _gamepad1;
     DcMotor _frontLeft;
     DcMotor _frontRight;
     DcMotor _backLeft;
     DcMotor _backRight;
+    DcMotor _intakeLeft;
+    DcMotor _intakeRight;
+    DcMotor _liftLeft;
+    DcMotor _liftRight;
     Servo _backLeftServo;
     Servo _backRightServo;
 
@@ -28,8 +32,10 @@ public class WheelLocationClampTest extends OpMode {
         _backLeft = hardwareMap.dcMotor.get("bl");
         _backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         _backRight = hardwareMap.dcMotor.get("br");
-        _backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-
+        _intakeLeft = hardwareMap.dcMotor.get("il");
+        _intakeRight = hardwareMap.dcMotor.get("ir");
+        _liftLeft = hardwareMap.dcMotor.get("leftLift");
+        _liftRight = hardwareMap.dcMotor.get("rightLift");
 
         _backLeftServo = hardwareMap.servo.get("blhook");
         _backRightServo = hardwareMap.servo.get("brhook");
@@ -93,6 +99,11 @@ public class WheelLocationClampTest extends OpMode {
         telemetry.addData("br", "%d", _backRight.getCurrentPosition());
         telemetry.addData("bls", "%f", _backLeftServo.getPosition());
         telemetry.addData("brs", "%f", _backRightServo.getPosition());
+
+        telemetry.addData("il", "%d", _intakeLeft.getCurrentPosition());
+        telemetry.addData("ir", "%d", _intakeRight.getCurrentPosition());
+        telemetry.addData("leftLift", "%d", _liftLeft.getCurrentPosition());
+        telemetry.addData("rightLift", "%d", _liftRight.getCurrentPosition());
 
         telemetry.update();
     }

@@ -1,28 +1,18 @@
 package com.edinaftc.opmodes.roadrunner;
 
-import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.edinaftc.library.Stickygamepad;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
-import com.edinaftc.library.vision.VuforiaCamera;
-import com.edinaftc.skystone.vision.SkyStoneDetector;
-import com.edinaftc.skystone.vision.SkystoneLocation;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Autonomous(name="DriveForward", group="Autonomous")
 //@Config
 public class DriveForward extends LinearOpMode {
     private Stickygamepad _gamepad1;
-    private MecanumDriveBase_312_50 drive;
+    private MecanumDriveBase_435_60 drive;
 
     public void runOpMode() {
         long sleepTime = 0;
@@ -30,7 +20,7 @@ public class DriveForward extends LinearOpMode {
 
         _gamepad1 = new Stickygamepad(gamepad1);
 
-        drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
 
         while (!isStarted()) {
             synchronized (this) {
@@ -55,9 +45,9 @@ public class DriveForward extends LinearOpMode {
                     }
 
                     telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f",
-                            DriveConstants_312_50.MOTOR_CONFIG.getTicksPerRev(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getGearing(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getMaxRPM());
+                            DriveConstants_435_60.MOTOR_CONFIG.getTicksPerRev(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getGearing(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getMaxRPM());
                     telemetry.addData("use left/right bumper to adjust sleep time", "");
                     telemetry.addData("sleep time (ms)", sleepTime);
                     telemetry.addData("use dpad up/down to increase/decrease forward distance", "");

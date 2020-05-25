@@ -1,13 +1,12 @@
 package com.edinaftc.opmodes.roadrunner;
 
-import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.edinaftc.library.Stickygamepad;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
@@ -20,7 +19,7 @@ public class BluePullPlateAndPark extends LinearOpMode {
     private Servo left;
     private Servo right;
     private Stickygamepad _gamepad1;
-    private MecanumDriveBase_312_50 drive;
+    private MecanumDriveBase_435_60 drive;
     private DistanceSensor distance;
 
     public void runOpMode() {
@@ -32,7 +31,7 @@ public class BluePullPlateAndPark extends LinearOpMode {
         left = hardwareMap.servo.get("blhook");
         right = hardwareMap.servo.get("brhook");
 
-        drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
 
         while (!isStarted()) {
             synchronized (this) {
@@ -49,9 +48,9 @@ public class BluePullPlateAndPark extends LinearOpMode {
                     }
 
                     telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f",
-                            DriveConstants_312_50.MOTOR_CONFIG.getTicksPerRev(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getGearing(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getMaxRPM());
+                            DriveConstants_435_60.MOTOR_CONFIG.getTicksPerRev(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getGearing(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getMaxRPM());
                     telemetry.addData("use left/right bumper to adjust sleep time", "");
                     telemetry.addData("sleep time (ms)", sleepTime);
                     telemetry.addData("distance should be about 55", "%f", distance.getDistance(DistanceUnit.CM));

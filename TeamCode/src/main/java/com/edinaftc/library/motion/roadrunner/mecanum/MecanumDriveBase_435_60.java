@@ -25,21 +25,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.BASE_CONSTRAINTS;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.TRACK_WIDTH;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kA;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kStatic;
-import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_60.kV;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.BASE_CONSTRAINTS;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.TRACK_WIDTH;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.kA;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.kStatic;
+import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60.kV;
 
 /*
  * Base class with shared functionality for sample mecanum drives. All hardware-specific details are
  * handled in subclasses.
  */
 @Config
-public abstract class MecanumDriveBase_312_60 extends MecanumDrive {
-    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(0.05, 0, 0.1);
-    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(23, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.6, .0, .1);
+public abstract class MecanumDriveBase_435_60 extends MecanumDrive {
+    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(.8, 0, 0.1);
+    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(.95, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.5, .0, .1);
 
     public enum Mode {
         IDLE,
@@ -65,7 +65,7 @@ public abstract class MecanumDriveBase_312_60 extends MecanumDrive {
     private double turnTimeout;
     private boolean useTimeout = false;
 
-    public MecanumDriveBase_312_60() {
+    public MecanumDriveBase_435_60() {
         super(kV, kA, kStatic, TRACK_WIDTH);
 
         dashboard = FtcDashboard.getInstance();

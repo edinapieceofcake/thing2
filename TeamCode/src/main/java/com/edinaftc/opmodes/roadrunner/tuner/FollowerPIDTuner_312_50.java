@@ -2,8 +2,7 @@ package com.edinaftc.opmodes.roadrunner.tuner;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -20,7 +19,7 @@ public class FollowerPIDTuner_312_50 extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        MecanumDriveBase_312_50 drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        MecanumDriveREVOptimized_435_60 drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
 
         drive.setPoseEstimate(new Pose2d(-DISTANCE / 2, -DISTANCE / 2, 0));
 

@@ -6,9 +6,9 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.path.heading.LinearInterpolator;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.edinaftc.library.Stickygamepad;
-import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_312_50;
-import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_312_50;
+import com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveBase_435_60;
+import com.edinaftc.library.motion.roadrunner.mecanum.MecanumDriveREVOptimized_435_60;
 import com.edinaftc.library.vision.VuforiaCamera;
 import com.edinaftc.skystone.vision.SkyStoneDetector;
 import com.edinaftc.skystone.vision.SkystoneLocation;
@@ -19,8 +19,6 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
-import kotlin.Unit;
 
 @Autonomous(name="BackupTurnAndPark", group="Autonomous")
 @Disabled
@@ -34,7 +32,7 @@ public class BackupTurnAndPark extends LinearOpMode {
     private Servo right;
     private SkystoneLocation location = SkystoneLocation.left;
     private Stickygamepad _gamepad1;
-    private MecanumDriveBase_312_50 drive;
+    private MecanumDriveBase_435_60 drive;
     private DistanceSensor distance;
 
     public static double LEFTFIRSTX = -20;
@@ -80,7 +78,7 @@ public class BackupTurnAndPark extends LinearOpMode {
         hardwareMap.servo.get("leftArm").setPosition(1);
         hardwareMap.servo.get("leftFlap").setPosition(0);
 
-        drive = new MecanumDriveREVOptimized_312_50(hardwareMap);
+        drive = new MecanumDriveREVOptimized_435_60(hardwareMap);
 
         while (!isStarted()) {
             synchronized (this) {
@@ -98,9 +96,9 @@ public class BackupTurnAndPark extends LinearOpMode {
                     }
 
                     telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f",
-                            DriveConstants_312_50.MOTOR_CONFIG.getTicksPerRev(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getGearing(),
-                            DriveConstants_312_50.MOTOR_CONFIG.getMaxRPM());
+                            DriveConstants_435_60.MOTOR_CONFIG.getTicksPerRev(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getGearing(),
+                            DriveConstants_435_60.MOTOR_CONFIG.getMaxRPM());
                     telemetry.addData("use left/right bumper to adjust sleep time", "");
                     telemetry.addData("sleep time (ms)", sleepTime);
                     telemetry.addData("location ", location);
