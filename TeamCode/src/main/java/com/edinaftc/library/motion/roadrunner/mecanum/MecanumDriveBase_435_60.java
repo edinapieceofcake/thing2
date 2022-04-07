@@ -37,9 +37,9 @@ import static com.edinaftc.library.motion.roadrunner.mecanum.DriveConstants_435_
  */
 @Config
 public abstract class MecanumDriveBase_435_60 extends MecanumDrive {
-    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(.8, 0, 0.1);
-    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(.95, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.5, .0, .1);
+    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(.4, 0, 0.1);
+    public static PIDCoefficients LATERAL_PID = new PIDCoefficients(.35, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(1.55, .0, .1);
 
     public enum Mode {
         IDLE,
@@ -161,6 +161,12 @@ public abstract class MecanumDriveBase_435_60 extends MecanumDrive {
         packet.put("y", currentPose.getY());
         packet.put("heading", currentPose.getHeading());
 
+        packet.put("left", getLeftEncoder());
+        packet.put("right", getRightEncoder());
+        packet.put("front", getFrontEncoder());
+
+        packet.put("imu", getRawExternalHeading());
+
         packet.put("xError", lastError.getX());
         packet.put("yError", lastError.getY());
         packet.put("headingError", lastError.getHeading());
@@ -259,6 +265,14 @@ public abstract class MecanumDriveBase_435_60 extends MecanumDrive {
 
         return velocities;
     }
+
+    public double getRawExternalHeading() { return 0.0; }
+
+    public long getLeftEncoder() { return 0; }
+
+    public long getRightEncoder() { return 0; }
+
+    public long getFrontEncoder() { return 0; }
 
     public abstract PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode);
 

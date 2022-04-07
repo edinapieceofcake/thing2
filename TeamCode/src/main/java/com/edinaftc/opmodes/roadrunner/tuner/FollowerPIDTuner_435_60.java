@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Config
 @Autonomous(group = "drive")
 @Disabled
-public class FollowerPIDTuner_312_50 extends LinearOpMode {
+public class FollowerPIDTuner_435_60 extends LinearOpMode {
     public static double DISTANCE = 48;
 
     @Override

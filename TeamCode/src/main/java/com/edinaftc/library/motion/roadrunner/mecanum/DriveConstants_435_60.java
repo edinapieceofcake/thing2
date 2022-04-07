@@ -20,6 +20,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 @Config
 public class DriveConstants_435_60 {
 
+
     /*
      * The type of motor used on the drivetrain. While the SDK has definitions for many common
      * motors, there may be slight gear ratio inaccuracies for planetary gearboxes and other
@@ -46,7 +47,7 @@ public class DriveConstants_435_60 {
      */
     public static double WHEEL_RADIUS = 1.9685;
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 15.49;
+    public static double TRACK_WIDTH = 15.30;
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -71,7 +72,7 @@ public class DriveConstants_435_60 {
      * forces acceleration-limited profiling).
      */
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            35, 30, 0.0,
+            60, 40, 0.0,
             Math.toRadians(270), Math.toRadians(270), 0.0
     );
 

@@ -34,6 +34,7 @@ public class MecanumDriveREVOptimized_435_60 extends MecanumDriveBase_435_60 {
     private ExpansionHubEx hub9;
     private ExpansionHubEx hub2;
     private ExpansionHubMotor leftFront, leftRear, rightRear, rightFront;
+    private DcMotor leftEncoder, rightEncoder, frontEncoder;
     private List<ExpansionHubMotor> motors;
     private BNO055IMU imu;
 
@@ -61,6 +62,10 @@ public class MecanumDriveREVOptimized_435_60 extends MecanumDriveBase_435_60 {
         leftRear = hardwareMap.get(ExpansionHubMotor.class, "bl");
         rightRear = hardwareMap.get(ExpansionHubMotor.class, "br");
         rightFront = hardwareMap.get(ExpansionHubMotor.class, "fr");
+
+        frontEncoder = hardwareMap.dcMotor.get("leftLift");
+        rightEncoder = hardwareMap.dcMotor.get("ir");
+        leftEncoder = hardwareMap.dcMotor.get("il");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
@@ -145,4 +150,13 @@ public class MecanumDriveREVOptimized_435_60 extends MecanumDriveBase_435_60 {
     public double getRawExternalHeading() {
         return imu.getAngularOrientation().firstAngle;
     }
+
+    @Override
+    public long getLeftEncoder() { return leftEncoder.getCurrentPosition(); }
+
+    @Override
+    public long getRightEncoder() { return rightEncoder.getCurrentPosition(); }
+
+    @Override
+    public long getFrontEncoder() { return frontEncoder.getCurrentPosition(); }
 }

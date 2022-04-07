@@ -186,11 +186,7 @@ public class BlueQuadBlockPullPlateAndPark extends LinearOpMode {
 
         arm.setPosition(.35);
         sleep(100);
-        flap.setPosition(.9);
-        sleep(450);
-        arm.setPosition(0);
-        //sleep(200);
-
+        /*
         Trajectory dropOffSecondBlock = drive.trajectoryBuilder()
                 .splineTo(new Pose2d(0.0, 36.0))
                 .splineTo(new Pose2d(54.0, 30.0)) // drop off second block
@@ -295,5 +291,7 @@ public class BlueQuadBlockPullPlateAndPark extends LinearOpMode {
                 .build();
 
         drive.followTrajectorySync(driveToBridge);
+
+ */
     }
 }

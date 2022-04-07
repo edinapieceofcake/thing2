@@ -13,9 +13,9 @@ import kotlin.Unit;
  * This is a simple routine to test translational drive capabilities.
  */
 @Config
-@Disabled
+//@Disabled
 @Autonomous(group = "drive")
-public class StraightTest_312_50 extends LinearOpMode {
+public class StraightTest_435_60 extends LinearOpMode {
     public static double DISTANCE = 60;
 
     @Override
